@@ -11,6 +11,7 @@ import {
   InputLabel,
   MenuItem,
 } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MUIDataTable from '../../src/';
@@ -20,6 +21,25 @@ class Example extends React.Component {
     downloadFile: true,
     ageFilterChecked: false,
   };
+
+  getMuiTheme = () =>
+    createMuiTheme({
+      overrides: {
+        MUIDataTable: {
+          root: {
+            backgroundColor: '#AAF',
+          },
+          paper: {
+            boxShadow: 'none',
+          },
+        },
+        MUIDataTableBodyCell: {
+          root: {
+            backgroundColor: '#FFF',
+          },
+        },
+      },
+    });
 
   render() {
     const columns = [
@@ -224,6 +244,16 @@ class Example extends React.Component {
       responsive: 'stacked',
       rowsPerPage: 10,
       print: false,
+      textLabels: {
+        body: {
+          noMatch: 'レコードが見つけれませんでした。',
+        },
+        filter: {
+          all: '全てのレコード',
+          title: 'フィルター',
+          reset: 'リセット',
+        },
+      },
       downloadOptions: {
         filename: 'excel-format.csv',
         separator: ';',
@@ -268,9 +298,9 @@ class Example extends React.Component {
     };
 
     return (
-      <React.Fragment>
-        <MUIDataTable title={'ACME Employee list CSV'} data={data} columns={columns} options={options} />
-      </React.Fragment>
+      <MuiThemeProvider theme={this.getMuiTheme()}>
+        <MUIDataTable title={'Tracker'} data={data} columns={columns} options={options} />
+      </MuiThemeProvider>
     );
   }
 }
