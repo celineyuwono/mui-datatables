@@ -81,11 +81,10 @@ class Example extends React.Component {
         },
       },
       {
-        name: 'Age',
+        name: 'Date',
         options: {
           filter: true,
           filterType: 'custom',
-          filterList: [25, 50],
           customFilterListOptions: {
             render: v => {
               if (v[0] && v[1] && this.state.ageFilterChecked) {
@@ -127,7 +126,7 @@ class Example extends React.Component {
             },
             display: (filterList, onChange, index, column) => (
               <div>
-                <FormLabel>Age</FormLabel>
+                <FormLabel>Date Range</FormLabel>
                 <FormGroup row>
                   <TextField
                     label="min"
@@ -165,12 +164,12 @@ class Example extends React.Component {
         },
       },
       {
-        name: 'Salary',
+        name: 'Status',
         options: {
           filter: true,
           filterType: 'checkbox',
           filterOptions: {
-            names: ['Lower wages', 'Average wages', 'Higher wages'],
+            names: ['Fail', 'Success', 'Pending'],
             logic(salary, filterVal) {
               salary = salary.replace(/[^\d]/g, '');
               const show =
